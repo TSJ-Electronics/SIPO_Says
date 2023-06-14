@@ -60,8 +60,6 @@ setWinningScore(winningScore);
 void loop() {
   if(digitalRead(newGameButton) == HIGH){// You dont need == HIGH but left to make code easier to read
     resetScoreCounter();
-    noteDuration = noteDuration;
-    noteDelay = noteDelay;
     listenForCheatCodeActivation();
     setGameStatus(true);
   }
