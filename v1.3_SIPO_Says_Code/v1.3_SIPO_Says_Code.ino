@@ -35,30 +35,30 @@ Color Directionals:
 */
 
 void setup() {
-pinMode(upButton, INPUT_PULLUP);
-pinMode(rightButton, INPUT_PULLUP);
-pinMode(downButton, INPUT_PULLUP);
-pinMode(leftButton, INPUT_PULLUP);
-pinMode(newGameButton, INPUT);
+pinMode(BUTTON_UP, INPUT_PULLUP);
+pinMode(BUTTON_RIGHT, INPUT_PULLUP);
+pinMode(BUTTON_DOWN, INPUT_PULLUP);
+pinMode(BUTTON_LEFT, INPUT_PULLUP);
+pinMode(BUTTON_NEWGAME, INPUT);
 
-pinMode(upLED, OUTPUT);
-pinMode(rightLED, OUTPUT);
-pinMode(downLED, OUTPUT);
-pinMode(leftLED, OUTPUT);
-pinMode(buzzer, OUTPUT);
-digitalWrite(buzzer,LOW);//make sure buzzer is off.
+pinMode(LED_UP, OUTPUT);
+pinMode(LED_RIGHT, OUTPUT);
+pinMode(LED_DOWN, OUTPUT);
+pinMode(LED_LEFT, OUTPUT);
+pinMode(BUZZER, OUTPUT);
+digitalWrite(BUZZER,LOW);//make sure buzzer is off.
 
-pinMode(scoreBoardCLK, OUTPUT);
+pinMode(SCORE_CLK, OUTPUT);
 
 all_LEDs_Off();
-tone(buzzer, 1500, 500);// test tone
+tone(BUZZER, 1500, 500);// test tone
 powerOnInitialize();
 delay(1000);
 setWinningScore(winningScore);
 }
 
 void loop() {
-  if(digitalRead(newGameButton) == HIGH){// You dont need == HIGH but left to make code easier to read
+  if(digitalRead(BUTTON_NEWGAME) == HIGH){// You dont need == HIGH but left to make code easier to read
     resetScoreCounter();
     listenForCheatCodeActivation();
     setGameStatus(true);

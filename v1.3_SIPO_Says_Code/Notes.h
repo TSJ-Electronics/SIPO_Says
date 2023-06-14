@@ -2,10 +2,10 @@
 #define NOTES_H
 
 //Tones used for game
-#define upFrequency 415 //frequency for up / Green LED
-#define rightFrequency 310 //frequency for right / Red LED
-#define downFrequency 252 //frequency for down / Blue LED
-#define leftFrequency 209 //frequency for left / Yellow LED
+#define TONE_UP 415 //frequency for up / Green LED
+#define TONE_RIGHT 310 //frequency for right / Red LED
+#define TONE_DOWN 252 //frequency for down / Blue LED
+#define TONE_LEFT 209 //frequency for left / Yellow LED
 
 //musical notes
 #define NOTE_B0  31

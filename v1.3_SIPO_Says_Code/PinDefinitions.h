@@ -2,22 +2,22 @@
 #define PINDEFINITIONS_H
 
 //user input buttons
-#define upButton 0
-#define rightButton 1
-#define downButton 2
-#define leftButton 3
-#define newGameButton 9 //this also resets score, no need for reset score button.
+#define BUTTON_UP 0
+#define BUTTON_RIGHT 1
+#define BUTTON_DOWN 2
+#define BUTTON_LEFT 3
+#define BUTTON_NEWGAME 9 //this also resets score, no need for reset score button.
 
 //LED Groups
-#define upLED 8 //up should be RED
-#define rightLED 5 //right should be GREEN LED
-#define downLED 6 //down should be BLUE LED
-#define leftLED 7 //left should be YELLOW LED
+#define LED_UP 8 //up should be RED
+#define LED_RIGHT 5 //right should be GREEN LED
+#define LED_DOWN 6 //down should be BLUE LED
+#define LED_LEFT 7 //left should be YELLOW LED
 
 //Score counter Pin
-#define scoreBoardCLK 10
+#define SCORE_CLK 10
 
 //Buzzer Output Pin
-#define buzzer 4 
+#define BUZZER 4 
 
 #endif
