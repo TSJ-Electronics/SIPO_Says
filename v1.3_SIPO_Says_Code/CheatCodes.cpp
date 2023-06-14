@@ -9,7 +9,7 @@ void listenForCheatCodeActivation(){
   delay(10); // 10ms delay to fight mechanical bouncing, do not have debounce capacitors on board
   int timer = 0;// keep track of how long button is held down for
   int sleepTime = 20;// update timer every 20ms
-  while(digitalRead(newGameButton) == HIGH){
+  while(digitalRead(BUTTON_NEWGAME) == HIGH){
     delay(sleepTime);
     timer +=sleepTime;
     if(timer > 2000){ // if button is held down longer than 2 seconds
@@ -26,20 +26,20 @@ void enterCheatCode(){
   int konamiCodeSequenceCounter = 0;
   bool konamiCodeSuccess = true;
   bool enteringCode = true;
-  tone(buzzer, NOTE_D6, 100);
-  noTone(buzzer);
+  tone(BUZZER, NOTE_D6, 100);
+  noTone(BUZZER);
   delay(100);
-  tone(buzzer, NOTE_D6, 100);
+  tone(BUZZER, NOTE_D6, 100);
   spinLED(200);
 while (konamiCodeSuccess && konamiCodeSequenceCounter <= 7){
-    while(digitalRead(upButton) && digitalRead(rightButton) && //While no buttons are pressed
-    digitalRead(leftButton) && digitalRead(downButton)){
+    while(digitalRead(BUTTON_UP) && digitalRead(BUTTON_RIGHT) && //While no buttons are pressed
+    digitalRead(BUTTON_LEFT) && digitalRead(BUTTON_DOWN)){
       //do nothing while no buttons pressed
     }
     
       currentKeyPressed = checkForPlayerInput();
       waitForPlayerButtonRelease();
-      noTone(buzzer); // turn off sound
+      noTone(BUZZER); // turn off sound
       all_LEDs_Off(); // turn off LED
       
       if(currentKeyPressed != konamiCode[konamiCodeSequenceCounter]){
@@ -56,16 +56,16 @@ while (konamiCodeSuccess && konamiCodeSequenceCounter <= 7){
 void playTune(){
   //play random tune
   for(int x = 0; x < random(25,55); x++){
-    tone(buzzer,random(100,1800), random(75, 550));
+    tone(BUZZER,random(100,1800), random(75, 550));
     randomLight();
     delay(random(0,300));
   }
-  noTone(buzzer);
+  noTone(BUZZER);
 }
 void hardMode(){
-  tone(buzzer, NOTE_DS4, 100);
-  tone(buzzer, NOTE_DS4, 100);
-  tone(buzzer, NOTE_DS3, 600);
+  tone(BUZZER, NOTE_DS4, 100);
+  tone(BUZZER, NOTE_DS4, 100);
+  tone(BUZZER, NOTE_DS3, 600);
   for(int x = 0; x < 25; x++){
     incrementScoreCounter();
     spinLED(10);

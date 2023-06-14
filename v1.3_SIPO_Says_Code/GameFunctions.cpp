@@ -58,13 +58,13 @@ void computerTurn(int noteDuration, int interNoteDelay){
 
 void waitForPlayerButtonRelease(){
   //while any button is pressed do nothing
-  while(!digitalRead(upButton) || !digitalRead(rightButton) ||
-    !digitalRead(leftButton) || !digitalRead(downButton)){
+  while(!digitalRead(BUTTON_UP) || !digitalRead(BUTTON_RIGHT) ||
+    !digitalRead(BUTTON_LEFT) || !digitalRead(BUTTON_DOWN)){
       //do nothing
     }
   delay(30);// delay to combat button release mechanical bouncing, not sure if this is really the problem but there has been an issue with misreading relase signals
   //When button released turn off lights and sound
-  noTone(buzzer); // turn off sound
+  noTone(BUZZER); // turn off sound
   all_LEDs_Off(); // turn off LED
 }
 
@@ -72,27 +72,27 @@ gameDirections checkForPlayerInput(){ //Check if button is pressed, play corresp
   gameDirections currentKeyPressed = NONE;
   //delay because of mechanical bouncing, i did not add debounce capacitors because wanted to save board space
   delay(30);
-  if(digitalRead(upButton) == LOW){
+  if(digitalRead(BUTTON_UP) == LOW){
         currentKeyPressed = UP;
-        tone(buzzer,upFrequency);
+        tone(BUZZER,upFrequency);
         up_LED_On();
         return currentKeyPressed;
       }
-        if(digitalRead(rightButton) == LOW){
+        if(digitalRead(BUTTON_RIGHT) == LOW){
           currentKeyPressed = RIGHT;
-          tone(buzzer,rightFrequency);
+          tone(BUZZER,rightFrequency);
           right_LED_On();
           return currentKeyPressed;
       }
-        if(digitalRead(downButton) == LOW){
+        if(digitalRead(BUTTON_DOWN) == LOW){
           currentKeyPressed = DOWN;
-          tone(buzzer,downFrequency);
+          tone(BUZZER,downFrequency);
           down_LED_On();
           return currentKeyPressed;
       }
-        if(digitalRead(leftButton) == LOW){
+        if(digitalRead(BUTTON_LEFT) == LOW){
           currentKeyPressed = LEFT;
-          tone(buzzer,leftFrequency);
+          tone(BUZZER,leftFrequency);
           left_LED_On();
           return currentKeyPressed;
       }
@@ -103,8 +103,8 @@ bool playerTurn(){
   gameDirections currentKeyPressed = NONE;
   for(int x = 0; x < currentScore; x++){
     
-    while(digitalRead(upButton) && digitalRead(rightButton) && //While no buttons are pressed
-    digitalRead(leftButton) && digitalRead(downButton)){
+    while(digitalRead(BUTTON_UP) && digitalRead(BUTTON_RIGHT) && //While no buttons are pressed
+    digitalRead(BUTTON_LEFT) && digitalRead(BUTTON_DOWN)){
       //do nothing while no buttons are pressed
     }
       currentKeyPressed = checkForPlayerInput();
@@ -119,41 +119,41 @@ bool playerTurn(){
 
 void incrementScoreCounter(){
   currentScore++;
-  digitalWrite(scoreBoardCLK, HIGH); // update scoreboard to == number of turns
+  digitalWrite(SCORE_CLK, HIGH); // update scoreboard to == number of turns
   delay(25);
-  digitalWrite(scoreBoardCLK, LOW);
+  digitalWrite(SCORE_CLK, LOW);
 }
 
 void playUp(int sequenceDelay){
   up_LED_On();
-  tone(buzzer, upFrequency);
+  tone(BUZZER, upFrequency);
   delay(sequenceDelay);
-  noTone(buzzer);
-  digitalWrite(upLED, LOW);
+  noTone(BUZZER);
+  digitalWrite(LED_UP, LOW);
 }
 
 void playRight(int sequenceDelay){
   right_LED_On();
-  tone(buzzer, rightFrequency);
+  tone(BUZZER, rightFrequency);
   delay(sequenceDelay);
-  noTone(buzzer);
-  digitalWrite(rightLED, LOW);
+  noTone(BUZZER);
+  digitalWrite(LED_RIGHT, LOW);
 }
 
 void playDown(int sequenceDelay){
   down_LED_On();
-  tone(buzzer,downFrequency);
+  tone(BUZZER,downFrequency);
   delay(sequenceDelay);
-  noTone(buzzer);
-  digitalWrite(downLED, LOW);
+  noTone(BUZZER);
+  digitalWrite(LED_DOWN, LOW);
 }
 
 void playLeft(int sequenceDelay){
   left_LED_On();
-  tone(buzzer, leftFrequency);
+  tone(BUZZER, leftFrequency);
   delay(sequenceDelay);
-  noTone(buzzer);
-  digitalWrite(leftLED, LOW);
+  noTone(BUZZER);
+  digitalWrite(LED_LEFT, LOW);
 }
 
 void winGame(){
@@ -166,15 +166,15 @@ void winGame(){
 void gameOver(){
   setGameStatus(false);
   all_LEDs_On();
-  tone(buzzer,NOTE_A2,400);
+  tone(BUZZER,NOTE_A2,400);
   all_LEDs_Off();
-  tone(buzzer,NOTE_D3,120);
+  tone(BUZZER,NOTE_D3,120);
   all_LEDs_On();
-  tone(buzzer,NOTE_A2,120);
+  tone(BUZZER,NOTE_A2,120);
   all_LEDs_Off();
-  tone(buzzer,NOTE_D3,120);
+  tone(BUZZER,NOTE_D3,120);
   all_LEDs_On();
-  tone(buzzer,NOTE_CS4,300);
+  tone(BUZZER,NOTE_CS4,300);
   all_LEDs_Off();
   spinLED(155);
 }
@@ -227,13 +227,13 @@ int divider = 0, noteDuration = 0;
     randomLight();
 
     // we only play the note for 90% of the duration, leaving 10% as a pause
-    tone(buzzer, melody[thisNote], noteDuration * 0.9);
+    tone(BUZZER, melody[thisNote], noteDuration * 0.9);
 
     // Wait for the specief duration before playing the next note.
     delay(noteDuration);
 
     // stop the waveform generation before the next note.
-    noTone(buzzer);
+    noTone(BUZZER);
   }
   all_LEDs_Off();
 }
