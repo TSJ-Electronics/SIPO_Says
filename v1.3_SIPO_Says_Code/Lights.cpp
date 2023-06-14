@@ -11,50 +11,50 @@ void all_LEDs_On(){
 }
 
 void up_LED_On(){
-  digitalWrite(upLED, HIGH);
+  digitalWrite(LED_UP, HIGH);
 }
 void right_LED_On(){
-  digitalWrite(rightLED, HIGH);
+  digitalWrite(LED_RIGHT, HIGH);
 }
 void down_LED_On(){
-  digitalWrite(downLED, HIGH);
+  digitalWrite(LED_DOWN, HIGH);
 }
 void left_LED_On(){
-  digitalWrite(leftLED, HIGH);
+  digitalWrite(LED_LEFT, HIGH);
 }
 
 void randomLight(){
   all_LEDs_Off();// turn off any light that may be on
   int light = random(0,4); // 0 to 4 because min is inclusive, max is exclusive
   switch(light){
-    case UP: digitalWrite(upLED, HIGH); break;
-    case RIGHT: digitalWrite(rightLED, HIGH); break;
-    case DOWN: digitalWrite(downLED, HIGH); break;
-    case LEFT: digitalWrite(leftLED, HIGH); break;
+    case UP: digitalWrite(LED_UP, HIGH); break;
+    case RIGHT: digitalWrite(LED_RIGHT, HIGH); break;
+    case DOWN: digitalWrite(LED_DOWN, HIGH); break;
+    case LEFT: digitalWrite(LED_LEFT, HIGH); break;
   }
 }
 
 void all_LEDs_Off(){
-  digitalWrite(upLED, LOW);
-  digitalWrite(rightLED, LOW);
-  digitalWrite(downLED, LOW);
-  digitalWrite(leftLED, LOW);
+  digitalWrite(LED_UP, LOW);
+  digitalWrite(LED_RIGHT, LOW);
+  digitalWrite(LED_DOWN, LOW);
+  digitalWrite(LED_LEFT, LOW);
 }
 
 void spinLED(int timer){
-  digitalWrite(upLED, HIGH);
+  digitalWrite(LED_UP, HIGH);
   delay(timer);
-  digitalWrite(upLED, LOW);
+  digitalWrite(LED_UP, LOW);
   
-  digitalWrite(rightLED, HIGH);
+  digitalWrite(LED_RIGHT, HIGH);
   delay(timer);
-  digitalWrite(rightLED, LOW);
+  digitalWrite(LED_RIGHT, LOW);
   
-  digitalWrite(downLED, HIGH);
+  digitalWrite(LED_DOWN, HIGH);
   delay(timer);
-  digitalWrite(downLED, LOW);
+  digitalWrite(LED_DOWN, LOW);
   
-  digitalWrite(leftLED, HIGH);
+  digitalWrite(LED_LEFT, HIGH);
   delay(timer);
-  digitalWrite(leftLED, LOW);
+  digitalWrite(LED_LEFT, LOW);
 }

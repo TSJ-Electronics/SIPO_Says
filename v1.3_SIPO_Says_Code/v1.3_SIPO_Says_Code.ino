@@ -13,18 +13,18 @@
 #include "GameFunctions.h"
 #include <Arduino.h>
 
-const int sudoSaysNoteDuration = 400; //How long each note will be played in milliseconds. The lower this number the faster the computer sequence will be played. 400 is default setting
-const int sudoSaysNoteDelay = 150; //Pause time between each note, the higher this note the longer the delay between notes, 150 is default setting
+const int noteDuration = 400; //How long each note will be played in milliseconds. The lower this number the faster the computer sequence will be played. 400 is default setting
+const int noteDelay = 150; //Pause time between each note, the higher this note the longer the delay between notes, 150 is default setting
 const int noteDurationReductionPerTurn = 20;// Each turn, note duration is reduced by this amount
 
 const int minimumNoteDuration = 100;// note duration cannot fall below this threshold
 const int minimumNoteDelay = 50;// delay between notes cannot fall below this threshhold
 
-int noteDuration = sudoSaysNoteDuration;//These are the values the code will change and manipulate, then reset to origional values every new game
-int noteDelay = sudoSaysNoteDelay;
+int noteDuration = noteDuration;//These are the values the code will change and manipulate, then reset to origional values every new game
+int noteDelay = noteDelay;
 
-bool isGameWinnable = false; // for infinite play set to false, for end game condition at set score amount set to true
-int winningScoreAmount = 12; // you can set the score so when this score is achieved, a song is played and you win!
+bool winnable = false; // for infinite play set to false, for end game condition at set score amount set to true
+int winningScore = 12; // you can set the score so when this score is achieved, a song is played and you win!
 
 /*
 Color Directionals:
@@ -35,36 +35,36 @@ Color Directionals:
 */
 
 void setup() {
-pinMode(upButton, INPUT_PULLUP);
-pinMode(rightButton, INPUT_PULLUP);
-pinMode(downButton, INPUT_PULLUP);
-pinMode(leftButton, INPUT_PULLUP);
-pinMode(newGameButton, INPUT);
+  pinMode(BUTTON_UP, INPUT_PULLUP);
+  pinMode(BUTTON_RIGHT, INPUT_PULLUP);
+  pinMode(BUTTON_DOWN, INPUT_PULLUP);
+  pinMode(BUTTON_LEFT, INPUT_PULLUP);
+  pinMode(BUTTON_NEWGAME, INPUT);
 
-pinMode(upLED, OUTPUT);
-pinMode(rightLED, OUTPUT);
-pinMode(downLED, OUTPUT);
-pinMode(leftLED, OUTPUT);
-pinMode(buzzer, OUTPUT);
-digitalWrite(buzzer,LOW);//make sure buzzer is off.
+  pinMode(LED_UP, OUTPUT);
+  pinMode(LED_RIGHT, OUTPUT);
+  pinMode(LED_DOWN, OUTPUT);
+  pinMode(LED_LEFT, OUTPUT);
+  pinMode(BUZZER, OUTPUT);
+  digitalWrite(BUZZER,LOW);//make sure buzzer is off.
 
-pinMode(scoreBoardCLK, OUTPUT);
+  pinMode(SCORE_CLK, OUTPUT);
 
-all_LEDs_Off();
-tone(buzzer, 1500, 500);// test tone
-powerOnInitialize();
-delay(1000);
-setWinningScore(winningScoreAmount);
+  all_LEDs_Off();
+  tone(BUZZER, 1500, 500);// test tone
+  powerOnInitialize();
+  delay(1000);
+  setWinningScore(winningScore);
 }
 
 void loop() {
-  if(digitalRead(newGameButton) == HIGH){// You dont need == HIGH but left to make code easier to read
+
+  if(digitalRead(BUTTON_NEWGAME) == HIGH){// You dont need == HIGH but left to make code easier to read
     resetScoreCounter();
-    noteDuration = sudoSaysNoteDuration;
-    noteDelay = sudoSaysNoteDelay;
     listenForCheatCodeActivation();
     setGameStatus(true);
   }
+  
   if(getGameStatus()){
     initializeRandomGameSequence();
     while(getGameStatus()){
@@ -81,7 +81,7 @@ void loop() {
       if(playerTurn() == false)// if player fails his turn end game, otherwise continue
         gameOver();
 
-      if(isGameWinnable && getCurrentScore() >= getWinningScore())// check if game is won
+      if(winnable && getCurrentScore() >= getWinningScore())// check if game is won
         winGame();
 
     }
