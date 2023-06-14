@@ -18,6 +18,7 @@ void listenForCheatCodeActivation(){
     }
   }
 }
+
 void enterCheatCode(){
 
   gameDirections currentKeyPressed = NONE;
@@ -31,21 +32,23 @@ void enterCheatCode(){
   delay(100);
   tone(BUZZER, NOTE_D6, 100);
   spinLED(200);
-while (konamiCodeSuccess && konamiCodeSequenceCounter <= 7){
+  
+  while (konamiCodeSuccess && konamiCodeSequenceCounter <= 7){
+    
     while(digitalRead(BUTTON_UP) && digitalRead(BUTTON_RIGHT) && //While no buttons are pressed
-    digitalRead(BUTTON_LEFT) && digitalRead(BUTTON_DOWN)){
-      //do nothing while no buttons pressed
+      digitalRead(BUTTON_LEFT) && digitalRead(BUTTON_DOWN)){
+        //do nothing while no buttons pressed
     }
     
-      currentKeyPressed = checkForPlayerInput();
-      waitForPlayerButtonRelease();
-      noTone(BUZZER); // turn off sound
-      all_LEDs_Off(); // turn off LED
-      
-      if(currentKeyPressed != konamiCode[konamiCodeSequenceCounter]){
-        konamiCodeSuccess = false;
-      }
-      konamiCodeSequenceCounter++;
+    currentKeyPressed = checkForPlayerInput();
+    waitForPlayerButtonRelease();
+    noTone(BUZZER); // turn off sound
+    all_LEDs_Off(); // turn off LED
+    
+    if(currentKeyPressed != konamiCode[konamiCodeSequenceCounter]){
+      konamiCodeSuccess = false;
+    }
+    konamiCodeSequenceCounter++;
   }
 
   if(konamiCodeSuccess)
@@ -53,6 +56,8 @@ while (konamiCodeSuccess && konamiCodeSequenceCounter <= 7){
   else
     playTune(); // play random tune
 }
+
+
 void playTune(){
   //play random tune
   for(int x = 0; x < random(25,55); x++){
@@ -62,6 +67,8 @@ void playTune(){
   }
   noTone(BUZZER);
 }
+
+
 void hardMode(){
   tone(BUZZER, NOTE_DS4, 100);
   tone(BUZZER, NOTE_DS4, 100);

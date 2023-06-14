@@ -35,34 +35,36 @@ Color Directionals:
 */
 
 void setup() {
-pinMode(BUTTON_UP, INPUT_PULLUP);
-pinMode(BUTTON_RIGHT, INPUT_PULLUP);
-pinMode(BUTTON_DOWN, INPUT_PULLUP);
-pinMode(BUTTON_LEFT, INPUT_PULLUP);
-pinMode(BUTTON_NEWGAME, INPUT);
+  pinMode(BUTTON_UP, INPUT_PULLUP);
+  pinMode(BUTTON_RIGHT, INPUT_PULLUP);
+  pinMode(BUTTON_DOWN, INPUT_PULLUP);
+  pinMode(BUTTON_LEFT, INPUT_PULLUP);
+  pinMode(BUTTON_NEWGAME, INPUT);
 
-pinMode(LED_UP, OUTPUT);
-pinMode(LED_RIGHT, OUTPUT);
-pinMode(LED_DOWN, OUTPUT);
-pinMode(LED_LEFT, OUTPUT);
-pinMode(BUZZER, OUTPUT);
-digitalWrite(BUZZER,LOW);//make sure buzzer is off.
+  pinMode(LED_UP, OUTPUT);
+  pinMode(LED_RIGHT, OUTPUT);
+  pinMode(LED_DOWN, OUTPUT);
+  pinMode(LED_LEFT, OUTPUT);
+  pinMode(BUZZER, OUTPUT);
+  digitalWrite(BUZZER,LOW);//make sure buzzer is off.
 
-pinMode(SCORE_CLK, OUTPUT);
+  pinMode(SCORE_CLK, OUTPUT);
 
-all_LEDs_Off();
-tone(BUZZER, 1500, 500);// test tone
-powerOnInitialize();
-delay(1000);
-setWinningScore(winningScore);
+  all_LEDs_Off();
+  tone(BUZZER, 1500, 500);// test tone
+  powerOnInitialize();
+  delay(1000);
+  setWinningScore(winningScore);
 }
 
 void loop() {
+
   if(digitalRead(BUTTON_NEWGAME) == HIGH){// You dont need == HIGH but left to make code easier to read
     resetScoreCounter();
     listenForCheatCodeActivation();
     setGameStatus(true);
   }
+  
   if(getGameStatus()){
     initializeRandomGameSequence();
     while(getGameStatus()){

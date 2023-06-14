@@ -208,27 +208,27 @@ void playSong(){
   //dont forget to change tempo to correct setting!
   
   //Happy Birthday
-int melody[] = {
-  NOTE_C4,4, NOTE_C4,8, 
-  NOTE_D4,-4, NOTE_C4,-4, NOTE_F4,-4,
-  NOTE_E4,-2, NOTE_C4,4, NOTE_C4,8, 
-  NOTE_D4,-4, NOTE_C4,-4, NOTE_G4,-4,
-  NOTE_F4,-2, NOTE_C4,4, NOTE_C4,8,
+  int melody[] = {
+    NOTE_C4,4, NOTE_C4,8, 
+    NOTE_D4,-4, NOTE_C4,-4, NOTE_F4,-4,
+    NOTE_E4,-2, NOTE_C4,4, NOTE_C4,8, 
+    NOTE_D4,-4, NOTE_C4,-4, NOTE_G4,-4,
+    NOTE_F4,-2, NOTE_C4,4, NOTE_C4,8,
 
-  NOTE_C5,-4, NOTE_A4,-4, NOTE_F4,-4, 
-  NOTE_E4,-4, NOTE_D4,-4, NOTE_AS4,4, NOTE_AS4,8,
-  NOTE_A4,-4, NOTE_F4,-4, NOTE_G4,-4,
-  NOTE_F4,-2,
-};
-// change this to make the song slower or faster
-int tempo = 140;
+    NOTE_C5,-4, NOTE_A4,-4, NOTE_F4,-4, 
+    NOTE_E4,-4, NOTE_D4,-4, NOTE_AS4,4, NOTE_AS4,8,
+    NOTE_A4,-4, NOTE_F4,-4, NOTE_G4,-4,
+    NOTE_F4,-2,
+  };
+  // change this to make the song slower or faster
+  int tempo = 140;
 
-int notes = sizeof(melody) / sizeof(melody[0]) / 2;
+  int notes = sizeof(melody) / sizeof(melody[0]) / 2;
 
-// this calculates the duration of a whole note in ms
-int wholenote = (60000 * 4) / tempo;
+  // this calculates the duration of a whole note in ms
+  int wholenote = (60000 * 4) / tempo;
 
-int divider = 0, noteDuration = 0;
+  int divider = 0, noteDuration = 0;
 
   // iterate over the notes of the melody.
   // Remember, the array is twice the number of notes (notes + durations)
@@ -258,5 +258,6 @@ int divider = 0, noteDuration = 0;
     noTone(BUZZER);
     noTone(BUZZER);
   }
+  
   all_LEDs_Off();
 }
