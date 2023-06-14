@@ -20,8 +20,8 @@ const int noteDurationReductionPerTurn = 20;// Each turn, note duration is reduc
 const int minimumNoteDuration = 100;// note duration cannot fall below this threshold
 const int minimumNoteDelay = 50;// delay between notes cannot fall below this threshhold
 
-int noteDuration = noteDuration;//These are the values the code will change and manipulate, then reset to origional values every new game
-int noteDelay = noteDelay;
+int currentNoteDuration = noteDuration;//These are the values the code will change and manipulate, then reset to origional values every new game
+int currentNoteDelay = noteDelay;
 
 bool winnable = false; // for infinite play set to false, for end game condition at set score amount set to true
 int winningScore = 12; // you can set the score so when this score is achieved, a song is played and you win!
@@ -61,6 +61,9 @@ void loop() {
 
   if(digitalRead(BUTTON_NEWGAME) == HIGH){// You dont need == HIGH but left to make code easier to read
     resetScoreCounter();
+    //reset note duration and delay to origional values
+    currentNoteDuration = noteDuration;
+    currentNoteDelay = noteDelay;
     listenForCheatCodeActivation();
     setGameStatus(true);
   }
@@ -70,13 +73,13 @@ void loop() {
     while(getGameStatus()){
       incrementScoreCounter();
       delay(500);//delay between computer turn start and player turn end.
-      computerTurn(noteDuration,noteDelay);
+      computerTurn(currentNoteDuration,currentNoteDelay);
       
-      if(noteDuration > minimumNoteDuration)  //reduce note duration 
-        noteDuration -= noteDurationReductionPerTurn;
+      if(currentNoteDuration > minimumNoteDuration)  //reduce note duration 
+        currentNoteDuration -= noteDurationReductionPerTurn;
 
-      if(noteDelay > minimumNoteDelay)  //reduce note delay duration
-        noteDelay -= (noteDurationReductionPerTurn/3);
+      if(currentNoteDelay > minimumNoteDelay)  //reduce note delay duration
+        currentNoteDelay -= (noteDurationReductionPerTurn/3);
         
       if(playerTurn() == false)// if player fails his turn end game, otherwise continue
         gameOver();
